@@ -1,0 +1,155 @@
+/* Global Reset and Overflow Prevention */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+}
+
+/* Header Styling */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav.active {
+    display: block;
+}
+
+/* Main Container */
+.checkout-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto;
+    display: block; /* Ensures table scrolls inside container if needed */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    word-break: break-word;
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+}
+
+.total {
+    font-weight: bold;
+    text-align: right;
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+/* Form Fields */
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.place-order-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.place-order-btn:hover {
+    background-color: #218838;
+}
+
+/* Floating Cart Button */
+.floating-cart {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #6b5b4b;
+    color: white;
+    padding: 14px 16px;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
+}
+
+.floating-cart:hover {
+    background-color: #8a6d4e;
+}
+
+/* Cart Count Badge */
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 7px;
+    font-size: 0.8rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+}
+footer {
+  background: #d7c3a6;
+  color: #4a403a;
+  text-align: center;
+  padding: 18px 0;
+  border-top: 2px solid #b29672;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1.1px;
+  font-family: 'Lora', serif;
+}

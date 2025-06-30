@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Guitar Shop</title>
+    <link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">Checkout</div>
+    <nav id="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cart.html">Cart</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="checkout-container">
+    <form action="https://formsubmit.co/pixelperfectphones@outlook.com" method="POST">
+        <table id="checkout-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Colors(s)</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody id="checkout-items">
+                <!-- Cart items will be loaded here -->
+            </tbody>
+        </table>
+
+        <div class="total" id="total-price">Total: $0.00</div>
+
+        <h3>Customer Information</h3>
+        <input type="text" name="Name" placeholder="Full Name" required>
+        <input type="email" name="Email" placeholder="Email Address" required>
+        <input type="tel" name="Phone" placeholder="Phone Number" required>
+        <textarea name="Shipping Address" placeholder="Shipping Address" required></textarea>
+
+        <h3>Select Payment Method</h3>
+        <select name="Payment Method" required>
+            <option value="Apple Pay">Apple Pay</option>
+            <option value="Bitcoin">Bitcoin</option>
+            <option value="Gift Card">Gift Card</option>
+            <option value="PayPal">PayPal</option>
+            <option value="Venmo">Venmo</option>
+            <option value="Zelle">Zelle</option>
+        </select>
+
+        <!-- Hidden field to send cart details -->
+        <textarea name="Order Details" id="order-details" style="display:none;"></textarea>
+
+        <button type="submit" class="place-order-btn">Place Order</button>
+    </form>
+</main>
+
+<footer>
+    <p>&copy; 2025 Guitar Shop. All rights reserved.</p>
+</footer>
+
+<script>
+    function loadCheckout() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const checkoutTable = document.getElementById('checkout-items');
+        const totalPriceEl = document.getElementById('total-price');
+        const orderDetailsEl = document.getElementById('order-details');
+        let total = 0;
+        let orderSummary = '';
+
+        checkoutTable.innerHTML = '';
+
+        cart.forEach(item => {
+            let itemTotal = item.price * item.quantity;
+            total += itemTotal;
+
+            let colorsDisplay = item.colors && item.colors.length > 0
+                ? item.colors.map(color => `<span style="display:inline-block;width:15px;height:15px;background:${color};border:1px solid #000;margin-right:5px;"></span>`).join(' ')
+                : 'No color selected';
+
+            const row = `
+                <tr>
+                    <td>${item.name}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.colors.join(', ') || 'No color selected'}</td>
+                    <td>$${itemTotal.toFixed(2)}</td>
+                </tr>
+            `;
+            checkoutTable.insertAdjacentHTML('beforeend', row);
+
+            orderSummary += `Product: ${item.name}, Quantity: ${item.quantity}, Colors: ${item.colors.join(', ') || 'None'}, Price: $${itemTotal.toFixed(2)}\n`;
+        });
+
+        totalPriceEl.textContent = 'Total: $' + total.toFixed(2);
+        orderSummary += `Total: $${total.toFixed(2)}`;
+        orderDetailsEl.value = orderSummary;
+    }
+
+    window.onload = loadCheckout;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shopping Cart - Guitar Shop</title>
+  <link rel="stylesheet" href="cartstyle.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">Guitar Shop</div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav id="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="checkout.html">Checkout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="cart-container">
+    <div class="table-wrapper">
+  <table id="cart-table">
+    ...
+  </table>
+</div>
+
+    <table id="cart-table" aria-label="Shopping Cart Items">
+      <thead>
+        <tr>
+          <th>Product &amp; Colors</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody id="cart-items">
+        <!-- Cart items inserted dynamically -->
+      </tbody>
+    </table>
+
+    <div id="total-price" class="total"></div>
+
+    <div id="empty-message" class="empty-cart" style="display:none;">
+      Your cart is empty.
+    </div>
+
+    <div class="checkout-container">
+      <a href="checkout.html" class="checkout-btn">Proceed to Checkout</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Guitar Shop. All rights reserved.</p>
+  </footer>
+
+<script>
+  const cartItemsEl = document.getElementById('cart-items');
+  const totalPriceEl = document.getElementById('total-price');
+  const emptyMessageEl = document.getElementById('empty-message');
+
+  // Available colors with hex codes
+  const colors = [
+    { name: 'Black', hex: '#000000' },
+    { name: 'Green', hex: '#2ecc71' },
+    { name: 'Red', hex: '#e74c3c' },
+    { name: 'Blue', hex: '#3498db' },
+    { name: 'White', hex: '#ecf0f1' },
+    { name: 'Brown', hex: '#8b4513' }
+  ];
+
+  function loadCart() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cartItemsEl.innerHTML = '';
+
+    if (cart.length === 0) {
+      totalPriceEl.style.display = 'none';
+      emptyMessageEl.style.display = 'block';
+      document.querySelector('.checkout-container').style.display = 'none';
+      return;
+    }
+
+    emptyMessageEl.style.display = 'none';
+    totalPriceEl.style.display = 'block';
+    document.querySelector('.checkout-container').style.display = 'block';
+
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      if (!item.colors) item.colors = [];
+      if (!item.quantity) item.quantity = 1;
+
+      const totalItemPrice = item.price * item.quantity;
+      total += totalItemPrice;
+
+      // Show selected color squares next to product name
+      const colorSquaresHTML = item.colors.map(c => {
+        const colorObj = colors.find(color => color.name === c);
+        const colorHex = colorObj ? colorObj.hex : '#000';
+        return `<span class="color-square" title="${c}" style="background-color: ${colorHex};"></span>`;
+      }).join(' ');
+
+      // Color checkboxes for selection
+      const colorCheckboxesHTML = colors.map(color => {
+        const checked = item.colors.includes(color.name) ? 'checked' : '';
+        return `
+          <label class="color-checkbox-label" title="${color.name}">
+            <input type="checkbox" onchange="changeColors(${index}, '${color.name}', this.checked)" ${checked} />
+            <span class="color-checkbox-square" style="background-color: ${color.hex};"></span>
+          </label>
+        `;
+      }).join('');
+
+      // Quantity options 1-10
+      const quantityOptions = Array.from({ length: 10 }, (_, i) =>
+        `<option value="${i + 1}" ${item.quantity === i + 1 ? 'selected' : ''}>${i + 1}</option>`
+      ).join('');
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>
+          <div class="product-name-col">
+            <span>${item.name}</span>
+            <div class="color-squares-container">${colorSquaresHTML}</div>
+            <div class="color-checkboxes-container">${colorCheckboxesHTML}</div>
+          </div>
+        </td>
+        <td>
+          <select aria-label="Select quantity for ${item.name}" onchange="changeQuantity(${index}, this.value)">
+            ${quantityOptions}
+          </select>
+        </td>
+        <td>$${totalItemPrice.toFixed(2)}</td>
+        <td><button class="remove-btn" aria-label="Remove ${item.name} from cart" onclick="removeItem(${index})">Remove</button></td>
+      `;
+
+      cartItemsEl.appendChild(tr);
+    });
+
+    totalPriceEl.textContent = 'Total: $' + total.toFixed(2);
+  }
+
+  // Color selection logic
+  function changeColors(index, colorName, isChecked) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart[index]) {
+      if (!cart[index].colors) cart[index].colors = [];
+      let selectedColors = cart[index].colors;
+
+      if (isChecked) {
+        if (cart[index].quantity === 1) {
+          // Only one color allowed if quantity is 1
+          selectedColors = [colorName];
+        } else {
+          if (selectedColors.length < cart[index].quantity && !selectedColors.includes(colorName)) {
+            selectedColors.push(colorName);
+          } else {
+            alert(`You can select up to ${cart[index].quantity} color(s) for this product.`);
+            loadCart();
+            return;
+          }
+        }
+      } else {
+        if (cart[index].quantity === 1) {
+          alert('You must select one color for this product.');
+          loadCart();
+          return;
+        } else {
+          selectedColors = selectedColors.filter(c => c !== colorName);
+          if (selectedColors.length === 0) {
+            alert('You must select at least one color.');
+            loadCart();
+            return;
+          }
+        }
+      }
+
+      cart[index].colors = selectedColors;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart();
+    }
+  }
+
+  // Quantity change logic
+  function changeQuantity(index, newQuantity) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart[index]) {
+      const qty = parseInt(newQuantity, 10);
+      cart[index].quantity = qty;
+
+      if (cart[index].colors && cart[index].colors.length > qty) {
+        cart[index].colors = cart[index].colors.slice(0, qty);
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart();
+    }
+  }
+
+  // Remove item from cart
+  function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    loadCart();
+  }
+
+  // Responsive menu toggle
+  function toggleMenu() {
+    const navbar = document.getElementById('navbar');
+    navbar.classList.toggle('active');
+  }
+
+  // Initialize cart on page load
+  window.onload = () => {
+    loadCart();
+  };
+</script>
+</body>
+</html>

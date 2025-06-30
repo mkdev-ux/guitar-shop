@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RG Series (Gio/Standard) - Details</title>
+    <link rel="stylesheet" href="productdetail.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+    <div class="logo">Guitar Shop</div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <nav id="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <main>
+        <div class="product-detail">
+            <h1>RG Series (Gio/Standard)</h1>
+            <p class="product-description">
+    Affordable and reliable, the RG Series Gio is perfect for beginners and intermediate players seeking sharp, aggressive tones and fast playability.
+</p>
+            <div class="product-images">
+                <img src="images/Ibanez RG Series Gio.jpg" alt="RG Series Gio">
+                <img src="ibanezdetails/RG Series (Gio-Standard)-1.jpg" alt="RG Gio Detail 1">
+                <img src="ibanezdetails/RG Series (Gio-Standard)-2.jpg" alt="RG Gio Detail 2">
+                <img src="ibanezdetails/RG Series (Gio-Standard)-3.jpg" alt="RG Gio Detail 3">
+            </div>
+            <p class="price">Price: $300</p>
+            <button class="add-to-cart" onclick="addToCart('RG Series (Gio/Standard)', 300)">Add to Cart</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Guitar Shop. All rights reserved.</p>
+    </footer>
+<a href="cart.html" class="floating-cart">
+    🛒 <span id="floating-cart-count">0</span>
+</a>
+    <script>
+       function addToCart(productName, productPrice) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let productIndex = cart.findIndex(item => item.name === productName);
+
+        if (productIndex !== -1) {
+            alert('Item is already added to cart!');
+        } else {
+            cart.push({ name: productName, price: productPrice, quantity: 1, colors: [] });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(productName + ' added to cart!');
+        }
+
+        updateCartCount();
+        updateFloatingCartCount();
+
+    }
+
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const count = cart.length;
+        const cartCountEl = document.getElementById('cart-count');
+        if (cartCountEl) {
+            cartCountEl.textContent = `(${count})`;
+        }
+    }
+
+    window.addEventListener('load', updateCartCount);
+
+
+    function toggleMenu() {
+    const navbar = document.getElementById('navbar');
+    navbar.classList.toggle('active');
+}
+function updateFloatingCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const count = cart.length;
+    const cartCountEl = document.getElementById('floating-cart-count');
+    if (cartCountEl) {
+        cartCountEl.textContent = count;
+    }
+}
+
+window.addEventListener('load', updateFloatingCartCount);
+
+
+    </script>
+</body>
+</html>
