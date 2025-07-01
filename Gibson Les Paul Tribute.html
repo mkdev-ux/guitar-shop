@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telecaster (Player Series) - Details</title>
+    <title>Gibson Les Paul Tribute - Details</title>
     <link rel="stylesheet" href="productdetail.css">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather&display=swap" rel="stylesheet">
 
 </head>
 <body>
-   <header>
+    <header>
     <div class="logo">Guitar Shop</div>
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     <nav id="navbar">
@@ -20,29 +20,30 @@
         </ul>
     </nav>
 </header>
+
     <main>
         <div class="product-detail">
-            <h1>Telecaster (Player Series)</h1>
+            <h1>Gibson Les Paul Tribute</h1>
             <p class="product-description">
-    The Telecaster Player Series is a workhorse guitar with a bright, cutting tone and durable build. A reliable choice for all music styles, from country to rock.
+  Designed with vintage tone in mind, the Tribute offers a lightweight mahogany body and burstbucker pickups for authentic Les Paul sounds. Its natural finish and robust build make it a standout at a budget-friendly price.
 </p>
             <div class="product-images">
-                <img src="images/Telecaster (Player Series).webp" alt="Telecaster Player">
-                <img src="fenderdetails/Telecaster (Player Series)-1.jpeg" alt="Telecaster Detail 1">
-                <img src="fenderdetails/Telecaster (Player Series)-2.jpg" alt="Telecaster Detail 2">
-                <img src="fenderdetails/Telecaster (Player Series)-3.jpg" alt="Telecaster Detail 3">
+                <img src="images/Gibson Les Paul Tribute.jpg" alt="Gibson Les Paul Tribute">
+                <img src="gibsondetails/Gibson Les Paul Tribute-1.webp" alt="Gibson Les Paul Tribute-1">
+                <img src="gibsondetails/Gibson Les Paul Tribute-2.jpg" alt="Gibson Les Paul Tribute-2">
+                <img src="gibsondetails/Gibson Les Paul Tribute-3.jpeg" alt="Gibson Les Paul Tribute-3">
             </div>
-            <p class="price">Price: $700</p>
-            <button class="add-to-cart" onclick="addToCart('Telecaster (Player Series)', 700)">Add to Cart</button>
+            <p class="price">Price: $900</p>
+            <button class="add-to-cart" onclick="addToCart('Gibson Les Paul Tribute', 900)">Add to Cart</button>
         </div>
     </main>
-
-    <footer>
-        <p>&copy; 2025 Guitar Shop. All rights reserved.</p>
-    </footer>
 <a href="cart.html" class="floating-cart">
     🛒 <span id="floating-cart-count">0</span>
 </a>
+    <footer>
+        <p>&copy; 2025 Guitar Shop. All rights reserved.</p>
+    </footer>
+
     <script>
        function addToCart(productName, productPrice) {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -89,9 +90,10 @@ function updateFloatingCartCount() {
 window.addEventListener('load', updateFloatingCartCount);
 
 
+
     </script>
 
-    <!--Start of Tawk.to Script-->
+<!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){

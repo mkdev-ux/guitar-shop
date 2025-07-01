@@ -10,7 +10,7 @@
   <header>
     <h1>Guitar Shop</h1>
     <nav>
-         <a href="index.html">Home</a>
+      <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="privacy.html">Privacy Policy</a>
       <a href="return.html">Return Policy</a>
@@ -25,7 +25,7 @@
     
     <h3>Customer Service</h3>
     <ul>
-      <li><strong>Email:</strong> <a href="mailto:support@guitarestore.com">support@guitarestore.com</a></li>
+      <li><strong>Email:</strong> <a href="mailto:guitarestore@outlook.com">guitarestore@outlook.com</a></li>
       <li><strong>Phone:</strong> +1 (555) 123-4567</li>
       <li><strong>Live Chat:</strong> Available Monday to Friday, 9 AM to 6 PM (EST)</li>
     </ul>
@@ -39,7 +39,7 @@
     </address>
     
     <h3>Contact Form</h3>
-    <form action="#" method="POST" id="contactForm">
+    <form id="contactForm">
       <label for="name">Full Name:</label><br />
       <input type="text" id="name" name="name" required /><br /><br />
       
@@ -54,23 +54,53 @@
       
       <button type="submit">Send Message</button>
     </form>
+
+    <p id="formResponse" style="color: green; margin-top: 15px; font-weight: bold;"></p>
   </main>
   
   <footer>
     <p>&copy; 2025 Guitar Shop. All rights reserved.</p>
   </footer>
-  <!--Start of Tawk.to Script-->
+
+<!-- AJAX Form Submission Script -->
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent form from redirecting
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    fetch('https://formsubmit.co/ajax/guitarestore@outlook.com', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        document.getElementById('formResponse').textContent = 'Message sent! We will get back to you soon.';
+        form.reset(); // Clear the form fields
+      } else {
+        document.getElementById('formResponse').textContent = 'Something went wrong. Please try again later.';
+      }
+    })
+    .catch(error => {
+      document.getElementById('formResponse').textContent = 'An error occurred. Please try again later.';
+    });
+  });
+</script>
+
+<!-- Tawk.to Script -->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
 s1.async=true;
-s1.src='https://embed.tawk.to/68630d3893bfc5190ef8477d/1iv1en9gi';
+s1.src='https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
 s1.charset='UTF-8';
 s1.setAttribute('crossorigin','*');
 s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
-<!--End of Tawk.to Script-->
+<!-- End of Tawk.to Script -->
+
 </body>
 </html>
