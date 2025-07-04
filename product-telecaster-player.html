@@ -1,108 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telecaster (Player Series) - Details</title>
-    <link rel="stylesheet" href="productdetail.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather&display=swap" rel="stylesheet">
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Telecaster (American Professional II Series) - Details</title>
+    <link rel="stylesheet" href="productdetail.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather&display=swap" rel="stylesheet" />
 </head>
 <body>
-   <header>
-    <div class="logo">Guitar Shop</div>
+  <header>
+    <div class="logo">Rudy's music</div>
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     <nav id="navbar">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
-            <li><a href="checkout.html">Checkout</a></li>
-        </ul>
+      <ul>
+        <li><a href="products.html">Home</a></li>
+        <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="checkout.html">Checkout</a></li>
+      </ul>
     </nav>
-</header>
-    <main>
-        <div class="product-detail">
-            <h1>Telecaster (Player Series)</h1>
-            <p class="product-description">
-    The Telecaster Player Series is a workhorse guitar with a bright, cutting tone and durable build. A reliable choice for all music styles, from country to rock.
-</p>
-            <div class="product-images">
-                <img src="images/Telecaster (Player Series).webp" alt="Telecaster Player">
-                <img src="fenderdetails/Telecaster (Player Series)-1.jpeg" alt="Telecaster Detail 1">
-                <img src="fenderdetails/Telecaster (Player Series)-2.jpg" alt="Telecaster Detail 2">
-                <img src="fenderdetails/Telecaster (Player Series)-3.jpg" alt="Telecaster Detail 3">
-            </div>
-            <p class="price">Price: $700</p>
-            <button class="add-to-cart" onclick="addToCart('Telecaster (Player Series)', 700)">Add to Cart</button>
-        </div>
-    </main>
+  </header>
 
-    <footer>
-        <p>&copy; 2025 Guitar Shop. All rights reserved.</p>
-    </footer>
-<a href="cart.html" class="floating-cart">
+  <main>
+    <div class="product-detail">
+      <h1>Telecaster (American Professional II Series)</h1>
+      <p class="product-description">
+        Designed for the modern guitarist, this Telecaster combines timeless style with next-generation performance. It delivers crystal-clear tones and exceptional sustain.
+      </p>
+      <div class="product-images">
+        <img src="images/Telecaster (American Professional II Series).jpg" alt="Telecaster American" />
+        <img src="fenderdetails/Telecaster (American Professional II Series)-1.webp" alt="Telecaster Detail 1" />
+        <img src="fenderdetails/Telecaster (American Professional II Series)-2.webp" alt="Telecaster Detail 2" />
+        <img src="fenderdetails/Telecaster (American Professional II Series)-3.webp" alt="Telecaster Detail 3" />
+      </div>
+      <p class="price">Price: $1,900</p>
+      <button class="add-to-cart" onclick="addToCart('Telecaster (American Professional II Series)', 1900)">Add to Cart</button>
+
+      <section>
+        <h2>Key Features</h2>
+        <ul class="features-list">
+          <li>American Professional II Tele single-coil pickups for crisp tone</li>
+          <li>Modern "Deep C" maple neck with rolled fingerboard edges</li>
+          <li>22 medium jumbo frets for smooth playability</li>
+          <li>Two-point tremolo bridge with bent steel saddles</li>
+          <li>Classic ash or alder body with gloss finish</li>
+          <li>Deluxe tuning machines for precise tuning stability</li>
+          <li>Perfect balance of vintage vibe and modern playability</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Specifications</h2>
+        <table class="specs-table">
+          <tr><th>Body</th><td>Ash or Alder (depending on finish)</td></tr>
+          <tr><th>Neck</th><td>Maple, Modern "Deep C" Shape</td></tr>
+          <tr><th>Fingerboard</th><td>Rosewood or Maple, 22 Medium Jumbo Frets</td></tr>
+          <tr><th>Pickups</th><td>American Professional II Tele Single-Coil</td></tr>
+          <tr><th>Bridge</th><td>2-Point Tremolo with Bent Steel Saddles</td></tr>
+          <tr><th>Hardware</th><td>Deluxe Tuning Machines</td></tr>
+          <tr><th>Scale Length</th><td>25.5 inches (648 mm)</td></tr>
+          <tr><th>Finish</th><td>Gloss Polyester</td></tr>
+          <tr><th>Colors Available</th><td>Butterscotch Blonde, Mystic Seafoam, Sonic Gray</td></tr>
+          <tr><th>Weight</th><td>Approx. 8.2 lbs</td></tr>
+        </table>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Rudy's music. All rights reserved.</p>
+  </footer>
+
+  <a href="cart.html" class="floating-cart">
     🛒 <span id="floating-cart-count">0</span>
-</a>
-    <script>
-       function addToCart(productName, productPrice) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let productIndex = cart.findIndex(item => item.name === productName);
+  </a>
 
-        if (productIndex !== -1) {
-            alert('Item is already added to cart!');
-        } else {
-            cart.push({ name: productName, price: productPrice, quantity: 1, colors: [] });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert(productName + ' added to cart!');
-        }
+  <script>
+    function addToCart(productName, productPrice) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let productIndex = cart.findIndex(item => item.name === productName);
 
-        updateCartCount();
-        updateFloatingCartCount();
+      if (productIndex !== -1) {
+        alert('Item is already added to cart!');
+      } else {
+        cart.push({ name: productName, price: productPrice, quantity: 1, colors: [] });
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(productName + ' added to cart!');
+      }
 
+      updateCartCount();
+      updateFloatingCartCount();
     }
 
     function updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const count = cart.length;
-        const cartCountEl = document.getElementById('cart-count');
-        if (cartCountEl) {
-            cartCountEl.textContent = `(${count})`;
-        }
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const count = cart.length;
+      const cartCountEl = document.getElementById('cart-count');
+      if (cartCountEl) {
+        cartCountEl.textContent = `(${count})`;
+      }
     }
 
     window.addEventListener('load', updateCartCount);
 
-
     function toggleMenu() {
-    const navbar = document.getElementById('navbar');
-    navbar.classList.toggle('active');
-}
-function updateFloatingCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const count = cart.length;
-    const cartCountEl = document.getElementById('floating-cart-count');
-    if (cartCountEl) {
-        cartCountEl.textContent = count;
+      const navbar = document.getElementById('navbar');
+      navbar.classList.toggle('active');
     }
-}
 
-window.addEventListener('load', updateFloatingCartCount);
+    function updateFloatingCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const count = cart.length;
+      const cartCountEl = document.getElementById('floating-cart-count');
+      if (cartCountEl) {
+        cartCountEl.textContent = count;
+      }
+    }
 
+    window.addEventListener('load', updateFloatingCartCount);
+  </script>
 
-    </script>
-
-    <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"),
+        s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = "https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r";
+      s1.charset = "UTF-8";
+      s1.setAttribute("crossorigin", "*");
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
 </body>
 </html>

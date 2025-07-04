@@ -1,109 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>S Series (Standard) - Details</title>
-    <link rel="stylesheet" href="productdetail.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="productdetail.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather&display=swap" rel="stylesheet" />
 </head>
 <body>
     <header>
-    <div class="logo">Guitar Shop</div>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <nav id="navbar">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
-            <li><a href="checkout.html">Checkout</a></li>
-        </ul>
-    </nav>
-</header>
+        <div class="logo">Rudy's music</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav id="navbar">
+            <ul>
+                <li><a href="products.html">Home</a></li>
+                <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <main>
         <div class="product-detail">
             <h1>S Series (Standard)</h1>
             <p class="product-description">
-    The S Series Standard offers lightweight comfort with a slim body and powerful pickups. Perfect for long playing sessions and versatile genres.
-</p>
+                The S Series Standard offers lightweight comfort with a slim body and powerful pickups. Perfect for long playing sessions and versatile genres.
+            </p>
             <div class="product-images">
-                <img src="images/Ibanez S Series Standard.webp" alt="S Series Standard">
-                <img src="ibanezdetails/S Series (Standard)-1.jpg" alt="S Standard Detail 1">
-                <img src="ibanezdetails/S Series (Standard)-2.jpg" alt="S Standard Detail 2">
-                <img src="ibanezdetails/S Series (Standard)-3.webp" alt="S Standard Detail 3">
+                <img src="images/Ibanez S Series Standard.webp" alt="S Series Standard" />
+                <img src="ibanezdetails/S Series (Standard)-1.jpg" alt="S Standard Detail 1" />
+                <img src="ibanezdetails/S Series (Standard)-2.jpg" alt="S Standard Detail 2" />
+                <img src="ibanezdetails/S Series (Standard)-3.webp" alt="S Standard Detail 3" />
             </div>
             <p class="price">Price: $600</p>
             <button class="add-to-cart" onclick="addToCart('S Series (Standard)', 600)">Add to Cart</button>
+
+            <!-- Key Features -->
+            <section>
+                <h2>Key Features</h2>
+                <ul class="features-list">
+                    <li>Lightweight mahogany body with sleek design</li>
+                    <li>Wizard III Maple neck for fast playability</li>
+                    <li>Rosewood fingerboard with 24 jumbo frets</li>
+                    <li>Infinity R pickups for dynamic tone</li>
+                    <li>Fixed bridge for tuning stability</li>
+                    <li>Ergonomic contours for comfort during long sessions</li>
+                    <li>Gloss finish highlighting natural wood grain</li>
+                </ul>
+            </section>
+
+            <!-- Specifications -->
+            <section>
+                <h2>Specifications</h2>
+                <table class="specs-table">
+                    <tr><th>Body</th><td>Mahogany</td></tr>
+                    <tr><th>Neck</th><td>Maple, Wizard III Profile</td></tr>
+                    <tr><th>Fingerboard</th><td>Rosewood, 24 Jumbo Frets</td></tr>
+                    <tr><th>Pickups</th><td>Infinity R (Humbucker + Single Coil)</td></tr>
+                    <tr><th>Bridge</th><td>Fixed Bridge</td></tr>
+                    <tr><th>Controls</th><td>Volume, Tone, 5-Way Switch</td></tr>
+                    <tr><th>Finish</th><td>Gloss</td></tr>
+                    <tr><th>Weight</th><td>Approx. 6.5 lbs</td></tr>
+                </table>
+            </section>
         </div>
     </main>
 
+    <a href="cart.html" class="floating-cart">
+        🛒 <span id="floating-cart-count">0</span>
+    </a>
+
     <footer>
-        <p>&copy; 2025 Guitar Shop. All rights reserved.</p>
+        <p>&copy; 2025 Rudy's music. All rights reserved.</p>
     </footer>
-<a href="cart.html" class="floating-cart">
-    🛒 <span id="floating-cart-count">0</span>
-</a>
+
     <script>
         function addToCart(productName, productPrice) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let productIndex = cart.findIndex(item => item.name === productName);
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let productIndex = cart.findIndex(item => item.name === productName);
 
-        if (productIndex !== -1) {
-            alert('Item is already added to cart!');
-        } else {
-            cart.push({ name: productName, price: productPrice, quantity: 1, colors: [] });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert(productName + ' added to cart!');
+            if (productIndex !== -1) {
+                alert('Item is already added to cart!');
+            } else {
+                cart.push({ name: productName, price: productPrice, quantity: 1, colors: [] });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(productName + ' added to cart!');
+            }
+
+            updateCartCount();
+            updateFloatingCartCount();
         }
 
-        updateCartCount();
-        updateFloatingCartCount();
-
-    }
-
-    function updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const count = cart.length;
-        const cartCountEl = document.getElementById('cart-count');
-        if (cartCountEl) {
-            cartCountEl.textContent = `(${count})`;
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.length;
+            const cartCountEl = document.getElementById('cart-count');
+            if (cartCountEl) {
+                cartCountEl.textContent = `(${count})`;
+            }
         }
-    }
 
-    window.addEventListener('load', updateCartCount);
+        function updateFloatingCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.length;
+            const cartCountEl = document.getElementById('floating-cart-count');
+            if (cartCountEl) {
+                cartCountEl.textContent = count;
+            }
+        }
 
+        function toggleMenu() {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('active');
+        }
 
-    function toggleMenu() {
-    const navbar = document.getElementById('navbar');
-    navbar.classList.toggle('active');
-}
-function updateFloatingCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const count = cart.length;
-    const cartCountEl = document.getElementById('floating-cart-count');
-    if (cartCountEl) {
-        cartCountEl.textContent = count;
-    }
-}
-
-window.addEventListener('load', updateFloatingCartCount);
-
-
+        window.addEventListener('load', () => {
+            updateCartCount();
+            updateFloatingCartCount();
+        });
     </script>
 
-   <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
 </body>
 </html>

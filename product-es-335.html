@@ -1,109 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ES-335 - Details</title>
-    <link rel="stylesheet" href="productdetail.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="productdetail.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather&display=swap" rel="stylesheet" />
 </head>
 <body>
-   <header>
-    <div class="logo">Guitar Shop</div>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <nav id="navbar">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
-            <li><a href="checkout.html">Checkout</a></li>
-        </ul>
-    </nav>
-</header>
+    <header>
+        <div class="logo">Rudy's music</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav id="navbar">
+            <ul>
+                <li><a href="products.html">Home</a></li>
+                <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <main>
         <div class="product-detail">
             <h1>ES-335</h1>
+
             <p class="product-description">
-    The ES-335 delivers a warm, resonant tone with semi-hollow body richness. Perfect for jazz, blues, and rock with a touch of vintage class.
-</p>
+                The ES-335 delivers a warm, resonant tone with semi-hollow body richness. Perfect for jazz, blues, and rock with a touch of vintage class.
+            </p>
+
             <div class="product-images">
-                <img src="images/ES-335.png" alt="ES-335">
-                <img src="gibsondetails/ES-335-1.webp" alt="ES-335 Detail 1">
-                <img src="gibsondetails/ES-335-2.jpg" alt="ES-335 Detail 2">
-                <img src="gibsondetails/ES-335-3.jpeg" alt="ES-335 Detail 3">
+                <img src="images/ES-335.png" alt="ES-335" />
+                <img src="gibsondetails/ES-335-1.webp" alt="ES-335 Detail 1" />
+                <img src="gibsondetails/ES-335-2.jpg" alt="ES-335 Detail 2" />
+                <img src="gibsondetails/ES-335-3.jpeg" alt="ES-335 Detail 3" />
             </div>
+
             <p class="price">Price: $3,500</p>
+
             <button class="add-to-cart" onclick="addToCart('ES-335', 3500)">Add to Cart</button>
+
+            <!-- Features Section -->
+            <section>
+                <h2>Key Features</h2>
+                <ul class="features-list">
+                    <li>Semi-hollow body for warm, versatile tone</li>
+                    <li>Classic maple top with mahogany back and sides</li>
+                    <li>Dual humbucking pickups for rich sound</li>
+                    <li>Rosewood fingerboard with 22 frets</li>
+                    <li>Vintage-style hardware and binding details</li>
+                </ul>
+            </section>
+
+            <!-- Specifications Table -->
+            <section>
+                <h2>Specifications</h2>
+                <table class="specs-table">
+                    <tr>
+                        <th>Body</th>
+                        <td>Maple Top, Mahogany Back & Sides</td>
+                    </tr>
+                    <tr>
+                        <th>Neck</th>
+                        <td>Mahogany Set Neck</td>
+                    </tr>
+                    <tr>
+                        <th>Fingerboard</th>
+                        <td>Rosewood, 22 Medium Frets</td>
+                    </tr>
+                    <tr>
+                        <th>Pickups</th>
+                        <td>Gibson '57 Classic Humbuckers</td>
+                    </tr>
+                    <tr>
+                        <th>Controls</th>
+                        <td>2 Volume, 2 Tone, 3-Way Pickup Selector</td>
+                    </tr>
+                    <tr>
+                        <th>Bridge</th>
+                        <td>ABR-1 Tune-O-Matic with Stopbar Tailpiece</td>
+                    </tr>
+                    <tr>
+                        <th>Finish</th>
+                        <td>Vintage Sunburst</td>
+                    </tr>
+                    <tr>
+                        <th>Weight</th>
+                        <td>Approx. 8.5 lbs</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- Shipping & Returns -->
+            <section>
+                <h2>Shipping & Returns</h2>
+                <p>
+                    Free standard shipping within the USA. Expedited shipping options available at checkout.
+                    Returns accepted within 30 days of delivery. Item must be in original condition and packaging.
+                </p>
+            </section>
+
+            <!-- Customer Reviews -->
+            <section>
+                <h2>Customer Reviews</h2>
+                <p><strong>★★★★★</strong> "Timeless tone and amazing feel. A true classic!" - Mark D.</p>
+                <p><strong>★★★★☆</strong> "Perfect guitar for studio and stage use." - Emily T.</p>
+            </section>
         </div>
     </main>
-<a href="cart.html" class="floating-cart">
-    🛒 <span id="floating-cart-count">0</span>
-</a>
+
+    <a href="cart.html" class="floating-cart">
+        🛒 <span id="floating-cart-count">0</span>
+    </a>
+
     <footer>
-        <p>&copy; 2025 Guitar Shop. All rights reserved.</p>
+        <p>&copy; 2025 Rudy's music. All rights reserved.</p>
     </footer>
 
     <script>
         function addToCart(productName, productPrice) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let productIndex = cart.findIndex(item => item.name === productName);
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let productIndex = cart.findIndex(item => item.name === productName);
 
-        if (productIndex !== -1) {
-            alert('Item is already added to cart!');
-        } else {
-            cart.push({ name: productName, price: productPrice, quantity: 1, colors: [] });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert(productName + ' added to cart!');
+            if (productIndex !== -1) {
+                alert('Item is already added to cart!');
+            } else {
+                cart.push({ name: productName, price: productPrice, quantity: 1, colors: [] });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(productName + ' added to cart!');
+            }
+
+            updateCartCount();
+            updateFloatingCartCount();
         }
 
-        updateCartCount();
-        updateFloatingCartCount();
-
-    }
-
-    function updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const count = cart.length;
-        const cartCountEl = document.getElementById('cart-count');
-        if (cartCountEl) {
-            cartCountEl.textContent = `(${count})`;
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.length;
+            const cartCountEl = document.getElementById('cart-count');
+            if (cartCountEl) {
+                cartCountEl.textContent = `(${count})`;
+            }
         }
-    }
 
-    window.addEventListener('load', updateCartCount);
+        function updateFloatingCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.length;
+            const cartCountEl = document.getElementById('floating-cart-count');
+            if (cartCountEl) {
+                cartCountEl.textContent = count;
+            }
+        }
 
+        window.addEventListener('load', () => {
+            updateCartCount();
+            updateFloatingCartCount();
+        });
 
-    function toggleMenu() {
-    const navbar = document.getElementById('navbar');
-    navbar.classList.toggle('active');
-}
-function updateFloatingCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const count = cart.length;
-    const cartCountEl = document.getElementById('floating-cart-count');
-    if (cartCountEl) {
-        cartCountEl.textContent = count;
-    }
-}
-
-window.addEventListener('load', updateFloatingCartCount);
-
-
+        function toggleMenu() {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('active');
+        }
     </script>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
 </body>
 </html>

@@ -1,110 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gibson Les Paul Tribute - Details</title>
     <link rel="stylesheet" href="productdetail.css">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather&display=swap" rel="stylesheet">
-
 </head>
+
 <body>
     <header>
-    <div class="logo">Guitar Shop</div>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <nav id="navbar">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
-            <li><a href="checkout.html">Checkout</a></li>
-        </ul>
-    </nav>
-</header>
+        <div class="logo">Rudy's Music</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav id="navbar">
+            <ul>
+                <li><a href="products.html">Home</a></li>
+                <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <main>
         <div class="product-detail">
             <h1>Gibson Les Paul Tribute</h1>
+
             <p class="product-description">
-  Designed with vintage tone in mind, the Tribute offers a lightweight mahogany body and burstbucker pickups for authentic Les Paul sounds. Its natural finish and robust build make it a standout at a budget-friendly price.
-</p>
+                Designed with vintage tone in mind, the Tribute offers a lightweight mahogany body and burstbucker pickups for authentic Les Paul sounds. Its natural finish and robust build make it a standout at a budget-friendly price.
+            </p>
+
             <div class="product-images">
                 <img src="images/Gibson Les Paul Tribute.jpg" alt="Gibson Les Paul Tribute">
                 <img src="gibsondetails/Gibson Les Paul Tribute-1.webp" alt="Gibson Les Paul Tribute-1">
                 <img src="gibsondetails/Gibson Les Paul Tribute-2.jpg" alt="Gibson Les Paul Tribute-2">
                 <img src="gibsondetails/Gibson Les Paul Tribute-3.jpeg" alt="Gibson Les Paul Tribute-3">
             </div>
+
             <p class="price">Price: $900</p>
+
             <button class="add-to-cart" onclick="addToCart('Gibson Les Paul Tribute', 900)">Add to Cart</button>
+
+            <!-- Features Section -->
+            <section>
+                <h2>Key Features</h2>
+                <ul class="features-list">
+                    <li>Burstbucker 2 & 3 pickups for authentic vintage tone</li>
+                    <li>Lightweight mahogany body for comfort</li>
+                    <li>Maple top with satin nitrocellulose finish</li>
+                    <li>SlimTaper neck profile for fast playability</li>
+                    <li>Adjustable Nashville Tune-O-Matic bridge for stable tuning</li>
+                </ul>
+            </section>
+
+            <!-- Specifications Table -->
+            <section>
+                <h2>Specifications</h2>
+                <table class="specs-table">
+                    <tr>
+                        <th>Body</th>
+                        <td>Mahogany with Maple Top</td>
+                    </tr>
+                    <tr>
+                        <th>Neck</th>
+                        <td>Maple, SlimTaper Profile</td>
+                    </tr>
+                    <tr>
+                        <th>Fingerboard</th>
+                        <td>Rosewood, 22 Medium Jumbo Frets</td>
+                    </tr>
+                    <tr>
+                        <th>Pickups</th>
+                        <td>Burstbucker 2 (neck), Burstbucker 3 (bridge)</td>
+                    </tr>
+                    <tr>
+                        <th>Controls</th>
+                        <td>2 Volume, 2 Tone, 3-Way Pickup Selector</td>
+                    </tr>
+                    <tr>
+                        <th>Bridge</th>
+                        <td>Nashville Tune-O-Matic with Stopbar Tailpiece</td>
+                    </tr>
+                    <tr>
+                        <th>Finish</th>
+                        <td>Satin Iced Tea</td>
+                    </tr>
+                    <tr>
+                        <th>Weight</th>
+                        <td>Approx. 9 lbs</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- Shipping & Returns -->
+            <section>
+                <h2>Shipping & Returns</h2>
+                <p>
+                    Free standard shipping on all orders within the USA. Expedited shipping options are available at checkout.
+                    Returns are accepted within 30 days of delivery if the item is in its original condition and packaging.
+                </p>
+            </section>
+
+            <!-- Customer Reviews -->
+            <section>
+                <h2>Customer Reviews</h2>
+                <p><strong>★★★★★</strong> "Amazing Les Paul for the price! It feels like a real vintage Gibson and the burstbuckers sound fantastic." - Chris P.</p>
+                <p><strong>★★★★☆</strong> "Solid build and classic tone. I wish the finish was a bit more glossy, but overall it’s excellent." - Dana R.</p>
+            </section>
+
         </div>
     </main>
-<a href="cart.html" class="floating-cart">
-    🛒 <span id="floating-cart-count">0</span>
-</a>
+
+    <a href="cart.html" class="floating-cart">
+        🛒 <span id="floating-cart-count">0</span>
+    </a>
+
     <footer>
-        <p>&copy; 2025 Guitar Shop. All rights reserved.</p>
+        <p>&copy; 2025 Rudy's Music. All rights reserved.</p>
     </footer>
 
+    <!-- Cart and Menu Scripts -->
     <script>
-       function addToCart(productName, productPrice) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let productIndex = cart.findIndex(item => item.name === productName);
+        function addToCart(productName, productPrice) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let productIndex = cart.findIndex(item => item.name === productName);
 
-        if (productIndex !== -1) {
-            alert('Item is already added to cart!');
-        } else {
-            cart.push({ name: productName, price: productPrice, quantity: 1, colors: [] });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert(productName + ' added to cart!');
+            if (productIndex !== -1) {
+                alert('Item is already added to cart!');
+            } else {
+                cart.push({ name: productName, price: productPrice, quantity: 1, colors: [] });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(productName + ' added to cart!');
+            }
+
+            updateCartCount();
+            updateFloatingCartCount();
         }
 
-        updateCartCount();
-        updateFloatingCartCount();
-
-    }
-
-    function updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const count = cart.length;
-        const cartCountEl = document.getElementById('cart-count');
-        if (cartCountEl) {
-            cartCountEl.textContent = `(${count})`;
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.length;
+            const cartCountEl = document.getElementById('cart-count');
+            if (cartCountEl) {
+                cartCountEl.textContent = `(${count})`;
+            }
         }
-    }
 
-    window.addEventListener('load', updateCartCount);
+        function updateFloatingCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.length;
+            const cartCountEl = document.getElementById('floating-cart-count');
+            if (cartCountEl) {
+                cartCountEl.textContent = count;
+            }
+        }
 
+        window.addEventListener('load', () => {
+            updateCartCount();
+            updateFloatingCartCount();
+        });
 
-    function toggleMenu() {
-    const navbar = document.getElementById('navbar');
-    navbar.classList.toggle('active');
-}
-function updateFloatingCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const count = cart.length;
-    const cartCountEl = document.getElementById('floating-cart-count');
-    if (cartCountEl) {
-        cartCountEl.textContent = count;
-    }
-}
-
-window.addEventListener('load', updateFloatingCartCount);
-
-
-
+        function toggleMenu() {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('active');
+        }
     </script>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
 </body>
+
 </html>

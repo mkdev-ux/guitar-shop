@@ -6,105 +6,176 @@
     <title>Ibanez GRX70QA - Details</title>
     <link rel="stylesheet" href="productdetail.css" />
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather&display=swap" rel="stylesheet">
-
 </head>
 <body>
     <header>
-    <div class="logo">Guitar Shop</div>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <nav id="navbar">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
-            <li><a href="checkout.html">Checkout</a></li>
-        </ul>
-    </nav>
-</header>
+        <div class="logo">Rudy's music</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav id="navbar">
+            <ul>
+                <li><a href="products.html">Home</a></li>
+                <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <main>
         <div class="product-detail">
-           <h1>Ibanez GRX70QA</h1>
+            <h1>Ibanez GRX70QA</h1>
 
-        <p class="product-description">
-           Ideal for beginners and casual players, the GRX70QA offers a comfortable feel and versatile sound. Its quilted maple finish adds style, while its quality build provides great value in an affordable package.
-        </p>
+            <p class="product-description">
+                Ideal for beginners and casual players, the GRX70QA offers a comfortable feel and versatile sound. Its quilted maple finish adds style, while its quality build provides great value in an affordable package.
+            </p>
+
             <div class="product-images">
                 <img src="images/Ibanez GRX70QA.jpeg" alt="Ibanez GRX70QA" />
                 <img src="ibanezdetails/Ibanez GRX70QA-1.jpg" alt="Ibanez GRX70QA-1" />
                 <img src="ibanezdetails/Ibanez GRX70QA-2.jpg" alt="Ibanez GRX70QA-2" />
                 <img src="ibanezdetails/Ibanez GRX70QA-3.jpg" alt="Ibanez GRX70QA-3" />
             </div>
+
             <p class="price">Price: $250</p>
+
             <button class="add-to-cart" onclick="addToCart('Ibanez GRX70QA', 250)">Add to Cart</button>
+
+            <!-- Features Section -->
+            <section>
+                <h2>Key Features</h2>
+                <ul class="features-list">
+                    <li>Quilted maple top with striking finish</li>
+                    <li>Comfortable GRX neck profile for beginners</li>
+                    <li>Powerful Infinity R humbuckers for versatile tone</li>
+                    <li>Fixed bridge for stable tuning</li>
+                    <li>Durable and lightweight design</li>
+                </ul>
+            </section>
+
+            <!-- Specifications Table -->
+            <section>
+                <h2>Specifications</h2>
+                <table class="specs-table">
+                    <tr>
+                        <th>Body</th>
+                        <td>Poplar Body with Quilted Maple Top</td>
+                    </tr>
+                    <tr>
+                        <th>Neck</th>
+                        <td>Maple GRX Neck</td>
+                    </tr>
+                    <tr>
+                        <th>Fingerboard</th>
+                        <td>Rosewood, 24 Medium Frets</td>
+                    </tr>
+                    <tr>
+                        <th>Pickups</th>
+                        <td>Infinity R Humbuckers (Neck & Bridge)</td>
+                    </tr>
+                    <tr>
+                        <th>Controls</th>
+                        <td>1 Volume, 1 Tone, 3-Way Pickup Selector</td>
+                    </tr>
+                    <tr>
+                        <th>Bridge</th>
+                        <td>Fixed Bridge</td>
+                    </tr>
+                    <tr>
+                        <th>Finish</th>
+                        <td>Quilted Maple Blue</td>
+                    </tr>
+                    <tr>
+                        <th>Weight</th>
+                        <td>Approx. 7.1 lbs</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- Shipping & Returns -->
+            <section>
+                <h2>Shipping & Returns</h2>
+                <p>
+                    Free standard shipping within the USA. Expedited shipping options are available at checkout.
+                    Returns are accepted within 30 days of delivery. Item must be in its original condition and packaging.
+                </p>
+            </section>
+
+            <!-- Customer Reviews -->
+            <section>
+                <h2>Customer Reviews</h2>
+                <p><strong>★★★★☆</strong> "Great beginner guitar with excellent playability and tone." - Sarah M.</p>
+                <p><strong>★★★★☆</strong> "Solid build and nice finish for the price. Perfect for practice." - James L.</p>
+            </section>
         </div>
     </main>
-<a href="cart.html" class="floating-cart">
-    🛒 <span id="floating-cart-count">0</span>
-</a>
+
+    <a href="cart.html" class="floating-cart">
+        🛒 <span id="floating-cart-count">0</span>
+    </a>
+
     <footer>
-        <p>&copy; 2025 Guitar Shop. All rights reserved.</p>
+        <p>&copy; 2025 Rudy's music. All rights reserved.</p>
     </footer>
 
+    <!-- Cart and Menu Scripts -->
     <script>
-       function addToCart(productName, productPrice) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let productIndex = cart.findIndex(item => item.name === productName);
+        function addToCart(productName, productPrice) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let productIndex = cart.findIndex(item => item.name === productName);
 
-        if (productIndex !== -1) {
-            alert('Item is already added to cart!');
-        } else {
-            cart.push({ name: productName, price: productPrice, quantity: 1, colors: [] });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert(productName + ' added to cart!');
+            if (productIndex !== -1) {
+                alert('Item is already added to cart!');
+            } else {
+                cart.push({ name: productName, price: productPrice, quantity: 1, colors: [] });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(productName + ' added to cart!');
+            }
+
+            updateCartCount();
+            updateFloatingCartCount();
         }
 
-        updateCartCount();
-        updateFloatingCartCount();
-
-    }
-
-    function updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const count = cart.length;
-        const cartCountEl = document.getElementById('cart-count');
-        if (cartCountEl) {
-            cartCountEl.textContent = `(${count})`;
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.length;
+            const cartCountEl = document.getElementById('cart-count');
+            if (cartCountEl) {
+                cartCountEl.textContent = `(${count})`;
+            }
         }
-    }
 
-    window.addEventListener('load', updateCartCount);
+        function updateFloatingCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.length;
+            const cartCountEl = document.getElementById('floating-cart-count');
+            if (cartCountEl) {
+                cartCountEl.textContent = count;
+            }
+        }
 
+        window.addEventListener('load', () => {
+            updateCartCount();
+            updateFloatingCartCount();
+        });
 
-    function toggleMenu() {
-    const navbar = document.getElementById('navbar');
-    navbar.classList.toggle('active');
-}
-function updateFloatingCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const count = cart.length;
-    const cartCountEl = document.getElementById('floating-cart-count');
-    if (cartCountEl) {
-        cartCountEl.textContent = count;
-    }
-}
-
-window.addEventListener('load', updateFloatingCartCount);
-
-
+        function toggleMenu() {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('active');
+        }
     </script>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
 </body>
 </html>

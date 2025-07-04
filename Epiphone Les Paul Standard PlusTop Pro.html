@@ -1,110 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Epiphone Les Paul Standard PlusTop Pro - Details</title>
     <link rel="stylesheet" href="productdetail.css" />
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather&display=swap" rel="stylesheet">
-
 </head>
+
 <body>
     <header>
-    <div class="logo">Guitar Shop</div>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <nav id="navbar">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
-            <li><a href="checkout.html">Checkout</a></li>
-        </ul>
-    </nav>
-</header>
+        <div class="logo">Rudy's Music</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav id="navbar">
+            <ul>
+                <li><a href="products.html">Home</a></li>
+                <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <main>
         <div class="product-detail">
-           <h1>Epiphone Les Paul Standard PlusTop Pro</h1>
+            <h1>Epiphone Les Paul Standard PlusTop Pro</h1>
 
-        <p class="product-description">
-            A budget-friendly alternative from Gibson’s sister brand, this guitar delivers classic Les Paul tones with ProBucker pickups and a stunning flame maple top. It’s a perfect entry point into the Gibson sound family.
-        </p>
+            <p class="product-description">
+                A budget-friendly alternative from Gibson’s sister brand, this guitar delivers classic Les Paul tones with ProBucker pickups and a stunning flame maple top. It’s a perfect entry point into the Gibson sound family.
+            </p>
+
             <div class="product-images">
                 <img src="images/Epiphone Les Paul Standard PlusTop Pro.jpg" alt="Epiphone Les Paul Standard PlusTop Pro" />
                 <img src="gibsondetails/Epiphone Les Paul Standard PlusTop Pro-1.jpeg" alt="Epiphone Les Paul Standard PlusTop Pro-1" />
                 <img src="gibsondetails/Epiphone Les Paul Standard PlusTop Pro-2.jpeg" alt="Epiphone Les Paul Standard PlusTop Pro-2" />
                 <img src="gibsondetails/Epiphone Les Paul Standard PlusTop Pro-3.jpg" alt="Epiphone Les Paul Standard PlusTop Pro-3" />
             </div>
+
             <p class="price">Price: $500</p>
+
             <button class="add-to-cart" onclick="addToCart('Epiphone Les Paul Standard PlusTop Pro', 500)">Add to Cart</button>
+
+            <!-- Features Section -->
+            <section>
+                <h2>Key Features</h2>
+                <ul class="features-list">
+                    <li>ProBucker humbucking pickups for rich, classic tones</li>
+                    <li>AAA flame maple top for a premium look</li>
+                    <li>Push-pull coil-splitting for tonal versatility</li>
+                    <li>Mahogany body and neck for warm resonance</li>
+                    <li>LockTone Tune-o-matic bridge for enhanced sustain</li>
+                </ul>
+            </section>
+
+            <!-- Specifications Table -->
+            <section>
+                <h2>Specifications</h2>
+                <table class="specs-table">
+                    <tr>
+                        <th>Body</th>
+                        <td>Mahogany with AAA Flame Maple Top</td>
+                    </tr>
+                    <tr>
+                        <th>Neck</th>
+                        <td>Mahogany, SlimTaper D Profile</td>
+                    </tr>
+                    <tr>
+                        <th>Fingerboard</th>
+                        <td>Rosewood, 22 Medium Jumbo Frets</td>
+                    </tr>
+                    <tr>
+                        <th>Pickups</th>
+                        <td>Epiphone ProBucker-2 & ProBucker-3</td>
+                    </tr>
+                    <tr>
+                        <th>Controls</th>
+                        <td>2 Volume (Push/Pull), 2 Tone, 3-Way Toggle</td>
+                    </tr>
+                    <tr>
+                        <th>Bridge</th>
+                        <td>LockTone Tune-o-matic</td>
+                    </tr>
+                    <tr>
+                        <th>Finish</th>
+                        <td>Heritage Cherry Sunburst</td>
+                    </tr>
+                    <tr>
+                        <th>Weight</th>
+                        <td>Approx. 8.6 lbs</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- Shipping & Returns -->
+            <section>
+                <h2>Shipping & Returns</h2>
+                <p>
+                    We offer free standard shipping on all orders within the USA. Expedited shipping options are available at checkout.
+                    Returns are accepted within 30 days of delivery. The item must be in original condition with all packaging included.
+                </p>
+            </section>
+
+            <!-- Optional Customer Reviews -->
+            <section>
+                <h2>Customer Reviews</h2>
+                <p><strong>★★★★★</strong> "Fantastic guitar for the price. The sound is phenomenal, and it looks gorgeous in person!" - Alex T.</p>
+                <p><strong>★★★★☆</strong> "Solid build and great tone, though I had to adjust the action slightly out of the box." - Jamie R.</p>
+            </section>
+
         </div>
     </main>
-<a href="cart.html" class="floating-cart">
-    🛒 <span id="floating-cart-count">0</span>
-</a>
+
+    <!-- Floating Cart -->
+    <a href="cart.html" class="floating-cart">
+        🛒 <span id="floating-cart-count">0</span>
+    </a>
+
     <footer>
-        <p>&copy; 2025 Guitar Shop. All rights reserved.</p>
+        <p>&copy; 2025 Rudy's Music. All rights reserved.</p>
     </footer>
 
+    <!-- Cart and Menu Scripts -->
     <script>
-       function addToCart(productName, productPrice) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let productIndex = cart.findIndex(item => item.name === productName);
+        function addToCart(productName, productPrice) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let productIndex = cart.findIndex(item => item.name === productName);
 
-        if (productIndex !== -1) {
-            alert('Item is already added to cart!');
-        } else {
-            cart.push({ name: productName, price: productPrice, quantity: 1, colors: [] });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert(productName + ' added to cart!');
+            if (productIndex !== -1) {
+                alert('Item is already added to cart!');
+            } else {
+                cart.push({ name: productName, price: productPrice, quantity: 1, colors: [] });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(productName + ' added to cart!');
+            }
+
+            updateCartCount();
+            updateFloatingCartCount();
         }
 
-        updateCartCount();
-        updateFloatingCartCount();
-
-    }
-
-    function updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const count = cart.length;
-        const cartCountEl = document.getElementById('cart-count');
-        if (cartCountEl) {
-            cartCountEl.textContent = `(${count})`;
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.length;
+            const cartCountEl = document.getElementById('cart-count');
+            if (cartCountEl) {
+                cartCountEl.textContent = `(${count})`;
+            }
         }
-    }
 
-    window.addEventListener('load', updateCartCount);
+        function updateFloatingCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.length;
+            const cartCountEl = document.getElementById('floating-cart-count');
+            if (cartCountEl) {
+                cartCountEl.textContent = count;
+            }
+        }
 
+        window.addEventListener('load', () => {
+            updateCartCount();
+            updateFloatingCartCount();
+        });
 
-    function toggleMenu() {
-    const navbar = document.getElementById('navbar');
-    navbar.classList.toggle('active');
-}
-function updateFloatingCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const count = cart.length;
-    const cartCountEl = document.getElementById('floating-cart-count');
-    if (cartCountEl) {
-        cartCountEl.textContent = count;
-    }
-}
-
-window.addEventListener('load', updateFloatingCartCount);
-
-
+        function toggleMenu() {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('active');
+        }
     </script>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    <!-- Tawk.to Chat Script -->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
 </body>
+
 </html>

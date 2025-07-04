@@ -1,508 +1,298 @@
-<!-- Updated Guitar Shop HTML with individual brand search bars -->
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Guitar Shop - Home</title>
-    <link rel="stylesheet" href="style.css" />
-    <style>
-        .wrapper {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rudy's Music - Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+
+<style>
+/* Reset and Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Lora', serif;
+}
+
+body {
+  background: #f4f1ec;
+  color: #222;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  line-height: 1.7;
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Floating Cart Button */
+.floating-cart {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #000;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.floating-cart:hover {
+  background-color: #c39b65;
+  transform: scale(1.1);
+}
+
+.floating-cart span {
+  background-color: #c0392b;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+}
+
+/* Header Navigation */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background-color: #000;
+  color: white;
+}
+
+.logo {
+  font-size: 2em;
+  font-weight: bold;
+  font-family: 'Merriweather', serif;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: #c39b65;
+  color: white;
+}
+
+/* Mobile Menu Button */
+.menu-toggle {
+  display: none;
+  font-size: 2em;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+  nav {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background-color: #000;
+    width: 220px;
     display: none;
-    padding: 20px;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
+    flex-direction: column;
+    border-radius: 0 0 8px 8px;
+  }
 
-.wrapper.active {
+  nav.active {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav ul li {
+    border-bottom: 1px solid #444;
+  }
+
+  nav ul li a {
+    padding: 15px;
+  }
+
+  .menu-toggle {
     display: block;
-    animation: fadeIn 0.7s ease forwards;
+  }
 }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .brand-buttons button {
-            margin: 10px;
-            padding: 10px 20px;
-            border: none;
-            background-color: #007BFF;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .brand-buttons button:hover {
-            background-color: #0056b3;
-        }
-        .search-container {
-            max-width: 400px;
-            margin: 20px auto;
-            text-align: center;
-        }
-        .search-container input {
-            width: 100%;
-            padding: 10px 15px;
-            font-size: 1rem;
-            border: 2px solid #a87f54;
-            border-radius: 25px;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-        .search-container input:focus {
-            border-color: #6b5b4b;
-        }
-    </style>
-</head>
+/* Main Content */
+main {
+  flex-grow: 1;
+  max-width: 1100px;
+  margin: 40px auto 60px auto;
+  padding: 0 20px;
+}
+
+.welcome-section {
+  text-align: center;
+  margin-top: 60px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 1.2s ease-out forwards;
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.welcome-section h1 {
+  font-family: 'Lora', serif;
+  font-weight: 700;
+  font-size: 3rem;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.welcome-section p {
+  font-size: 1.3rem;
+  max-width: 700px;
+  margin: 0 auto 30px auto;
+  color: #555;
+}
+
+.welcome-section a {
+  text-decoration: none;
+}
+
+/* Call to Action Button (Shop Now) */
+.add-to-cart {
+  display: inline-block;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 16px 50px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 40px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.add-to-cart:hover,
+.add-to-cart:focus {
+  background-color: #c39b65;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.7);
+  transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+  background: #f9f6f2;
+  color: #222;
+  text-align: center;
+  padding: 20px 0;
+  border-top: 2px solid #c39b65;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-family: 'Lora', serif;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  main {
+    margin: 20px 15px 40px 15px;
+  }
+
+  .welcome-section h1 {
+    font-size: 2.2rem;
+  }
+
+  .welcome-section p {
+    font-size: 1.1rem;
+  }
+}
+
+
+</style></head>
+
 <body>
-<header>
-    <div class="logo">Guitar Shop</div>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <nav id="navbar">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="checkout.html">Checkout</a></li>
-        </ul>
-    </nav>
-</header>
-<a href="cart.html" class="floating-cart">
-    🛒 <span id="floating-cart-count">0</span>
-</a>
-<main>
-    <center>
-        <h1 class="welcome-message">Welcome to Guitar Shop!</h1>
-        <p class="welcome-subtext">
-            Explore a wide range of electric and bass guitars from the top brands. Find your perfect sound today.
-        </p>
-        <div class="brand-buttons">
-            <button onclick="showBrand('fender')">Fender</button>
-            <button onclick="showBrand('gibson')">Gibson</button>
-            <button onclick="showBrand('ibanez')">Ibanez</button>
-        </div>
-    </center>
 
-    <!-- Fender Section -->
-    <div id="fender" class="wrapper active">
-        <div class="search-container">
-            <input type="text" id="searchFender" placeholder="Search Fender guitars...">
-        </div>
-         <p class="no-results" id="noResultsFender" style="display:none; text-align:center; color:red;">No results found.</p>
-        <section class="brand-section">
-            <h2>Fender - Electric Guitars</h2>
-            <p class="brand-description">
-                Fender is known for its legendary electric and bass guitars with a bright, clear tone. Popular models like the Stratocaster and Telecaster are staples in rock, blues, and jazz.
+    <!-- Header -->
+    <header>
+        <div class="logo">Rudy's Music</div>
+        <button class="menu-toggle" id="menuToggle">&#9776;</button>
+        <nav id="navMenu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="products.html">Guitars</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Welcome Section -->
+    <main>
+        <section class="welcome-section" style="text-align: center; margin-top: 60px;">
+            <h1 style="font-size: 3rem; margin-bottom: 20px;">Welcome to Rudy's Music</h1>
+            <p style="font-size: 1.3rem; max-width: 700px; margin: 0 auto 30px auto; color: #555;">Our website dedicated to top recent guitars only <br>
+                Discover a world of vintage guitars, rare finds, and modern classics. Rudy's Music brings you the finest collection of instruments for every musician.
             </p>
-            <div class="product-grid">
-                <div class="product-card">
-                    <a href="Fender Squier Classic Vibe 60s Stratocaster.html">
-                        <img src="images/Fender Squier Classic Vibe '60s Stratocaster.jpeg" alt="Fender Squier Classic Vibe 60s Stratocaster">
-                    </a>
-                    <h3>Fender Squier Classic Vibe '60s Stratocaster</h3>
-                    <p>$250</p>
-                    <button onclick="addToCart('Fender Squier Classic Vibe 60s Stratocaster', 350)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-stratocaster-player.html">
-                        <img src="images/stratocaster (Player Series).jpg" alt="Stratocaster Player">
-                    </a>
-                    <h3>Stratocaster (Player Series)</h3>
-                    <p>$700</p>
-                    <button onclick="addToCart('Stratocaster (Player Series)', 700)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-stratocaster-american.html">
-                        <img src="images/Stratocaster (American Professional II Series).jpeg" alt="Stratocaster American">
-                    </a>
-                    <h3>Stratocaster (American Professional II Series)</h3>
-                    <p>$1,900</p>
-                    <button onclick="addToCart('Stratocaster (American Professional II Series)', 1900)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-telecaster-player.html">
-                        <img src="images/Telecaster (Player Series).webp" alt="Telecaster Player">
-                    </a>
-                    <h3>Telecaster (Player Series)</h3>
-                    <p>$700</p>
-                    <button onclick="addToCart('Telecaster (Player Series)', 700)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-telecaster-american.html">
-                        <img src="images/Telecaster (American Professional II Series).jpg" alt="Telecaster American">
-                    </a>
-                    <h3>Telecaster (American Professional II Series)</h3>
-                    <p>$1,900</p>
-                    <button onclick="addToCart('Telecaster (American Professional II Series)', 1900)">Add to Cart</button>
-                </div>
-            </div>
-
-            <h2>Fender - Bass Guitars</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <a href="product-precision-player.html">
-                        <img src="images/Fender Precision Bass Player Series.webp" alt="Precision Bass Player">
-                    </a>
-                    <h3>Precision Bass (Player Series)</h3>
-                    <p>$900</p>
-                    <button onclick="addToCart('Precision Bass (Player Series)', 900)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-precision-american.html">
-                        <img src="images/Fender Precision Bass American Professional II Series.jpeg" alt="Precision Bass American">
-                    </a>
-                    <h3>Precision Bass (American Professional II Series)</h3>
-                    <p>$2,000</p>
-                    <button onclick="addToCart('Precision Bass (American Professional II Series)', 2000)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-jazz-player.html">
-                        <img src="images/Fender Jazz Bass Player Series.webp" alt="Jazz Bass Player">
-                    </a>
-                    <h3>Jazz Bass (Player Series)</h3>
-                    <p>$900</p>
-                    <button onclick="addToCart('Jazz Bass (Player Series)', 900)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-jazz-american.html">
-                        <img src="images/Fender Jazz Bass American Professional II Series.webp" alt="Jazz Bass American">
-                    </a>
-                    <h3>Jazz Bass (American Professional II Series)</h3>
-                    <p>$2,100</p>
-                    <button onclick="addToCart('Jazz Bass (American Professional II Series)', 2100)">Add to Cart</button>
-                </div>
-            </div>
+            <a href="products.html" class="add-to-cart" style="text-decoration: none;">Shop Now</a>
         </section>
-    </div>
+    </main>
 
-    <!-- Gibson Section -->
-    <div id="gibson" class="wrapper">
-        <div class="search-container">
-            <input type="text" id="searchGibson" placeholder="Search Gibson guitars...">
-        </div>
-        <p class="no-results" id="noResultsGibson" style="display:none; text-align:center; color:red;">No results found.</p>
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Rudy's Music. All rights reserved.
+    </footer>
 
-         <section class="brand-section">
-            <h2>Gibson - Electric Guitars</h2>
-            <p class="brand-description">
-                Gibson guitars are famous for their warm, rich sound and iconic designs. The Les Paul and SG models are among the most respected in the guitar world.
-            </p>
-            <div class="product-grid">
+    <!-- Mobile Menu Script -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
 
-                <div class="product-card">
-                    <a href="Epiphone Les Paul Standard PlusTop Pro.html">
-                        <img src="images/Epiphone Les Paul Standard PlusTop Pro.jpg" alt="Epiphone Les Paul Standard PlusTop Pro">
-                    </a>
-                    <h3>Epiphone Les Paul Standard PlusTop Pro</h3>
-                    <p>$500</p>
-                    <button onclick="addToCart('Epiphone Les Paul Standard PlusTop Pro', 500)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="Gibson Les Paul Tribute.html">
-                        <img src="images/Gibson Les Paul Tribute.jpg" alt="Gibson Les Paul Tribute">
-                    </a>
-                    <h3>Gibson Les Paul Tribute</h3>
-                    <p>$900</p>
-                    <button onclick="addToCart('Gibson Les Paul Tribute', 900)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-les-paul-standard.html">
-                        <img src="images/Les Paul Standard (50s-60s)1.webp" alt="Les Paul Standard">
-                    </a>
-                    <h3>Les Paul Standard (50s/60s)</h3>
-                    <p>$2,800</p>
-                    <button onclick="addToCart('Les Paul Standard (50s/60s)', 2800)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-les-paul-classic.html">
-                        <img src="images/Les Paul Classic.jpg" alt="Les Paul Classic">
-                    </a>
-                    <h3>Les Paul Classic</h3>
-                    <p>$2,200</p>
-                    <button onclick="addToCart('Les Paul Classic', 2200)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-les-paul-studio.html">
-                        <img src="images/Les Paul Studio.jpeg" alt="Les Paul Studio">
-                    </a>
-                    <h3>Les Paul Studio</h3>
-                    <p>$1,700</p>
-                    <button onclick="addToCart('Les Paul Studio', 1700)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-sg-standard.html">
-                        <img src="images/SG Standard.webp" alt="SG Standard">
-                    </a>
-                    <h3>SG Standard</h3>
-                    <p>$1,800</p>
-                    <button onclick="addToCart('SG Standard', 1800)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-es-335.html">
-                        <img src="images/ES-335.png" alt="ES-335">
-                    </a>
-                    <h3>ES-335</h3>
-                    <p>$3,500</p>
-                    <button onclick="addToCart('ES-335', 3500)">Add to Cart</button>
-                </div>
-            </div>
-
-            <h2>Gibson - Bass Guitars</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <a href="product-thunderbird-bass.html">
-                        <img src="images/Gibson Thunderbird Bass.jpeg" alt="Thunderbird Bass">
-                    </a>
-                    <h3>Thunderbird Bass</h3>
-                    <p>$2,500</p>
-                    <button onclick="addToCart('Thunderbird Bass', 2500)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-sg-bass.html">
-                        <img src="images/Gibson SG Bass.jpeg" alt="SG Bass">
-                    </a>
-                    <h3>SG Bass</h3>
-                    <p>$1,800</p>
-                    <button onclick="addToCart('SG Bass', 1800)">Add to Cart</button>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Ibanez Section -->
-    <div id="ibanez" class="wrapper">
-        <div class="search-container">
-            <input type="text" id="searchIbanez" placeholder="Search Ibanez guitars...">
-        </div>
-        <p class="no-results" id="noResultsIbanez" style="display:none; text-align:center; color:red;">No results found.</p>
-         <section class="brand-section">
-            <h2>Ibanez - Electric Guitars</h2>
-            <p class="brand-description">
-                Ibanez guitars are loved for their fast necks and modern designs, perfect for metal, rock, and fusion players looking for precision and versatility.
-            </p>
-            <div class="product-grid">
-                <div class="product-card">
-                    <a href="product-rg-gio.html">
-                        <img src="images/Ibanez RG Series Gio.jpg" alt="RG Series Gio">
-                    </a>
-                    <h3>RG Series (Gio/Standard)</h3>
-                    <p>$300</p>
-                    <button onclick="addToCart('RG Series (Gio/Standard)', 300)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="Ibanez Artcore AS73.html">
-                        <img src="images/Ibanez Artcore AS73.jpg" alt="Ibanez Artcore AS73">
-                    </a>
-                    <h3>Ibanez Artcore AS73</h3>
-                    <p>$400</p>
-                    <button onclick="addToCart('Ibanez Artcore AS73', 400)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="Ibanez GRX70QA.html">
-                        <img src="images/Ibanez GRX70QA.jpeg" alt="Ibanez GRX70QA">
-                    </a>
-                    <h3>Ibanez GRX70QA</h3>
-                    <p>$250</p>
-                    <button onclick="addToCart('Ibanez GRX70QA', 250)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-rg-premium.html">
-                        <img src="images/Ibanez RG Series Premium.jpeg" alt="RG Series Premium">
-                    </a>
-                    <h3>RG Series (Premium/Prestige)</h3>
-                    <p>$1,000</p>
-                    <button onclick="addToCart('RG Series (Premium/Prestige)', 1000)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-s-standard.html">
-                        <img src="images/Ibanez S Series Standard.webp" alt="S Series Standard">
-                    </a>
-                    <h3>S Series (Standard)</h3>
-                    <p>$600</p>
-                    <button onclick="addToCart('S Series (Standard)', 600)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-s-prestige.html">
-                        <img src="images/Ibanez S Series Prestige.jpg" alt="S Series Prestige">
-                    </a>
-                    <h3>S Series (Prestige)</h3>
-                    <p>$1,500</p>
-                    <button onclick="addToCart('S Series (Prestige)', 1500)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-az-standard.html">
-                        <img src="images/Ibanez AZ Series Standard.png" alt="AZ Series Standard">
-                    </a>
-                    <h3>AZ Series (AZES/Standard)</h3>
-                    <p>$400</p>
-                    <button onclick="addToCart('AZ Series (AZES/Standard)', 400)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-az-premium.html">
-                        <img src="images/Ibanez AZ Series Premium.webp" alt="AZ Series Premium">
-                    </a>
-                    <h3>AZ Series (Premium/Prestige)</h3>
-                    <p>$1,500</p>
-                    <button onclick="addToCart('AZ Series (Premium/Prestige)', 1500)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-jem-pia.html">
-                        <img src="images/Ibanez JEM Steve Vai Signature.jpg" alt="JEM PIA">
-                    </a>
-                    <h3>JEM / PIA (Steve Vai Signature)</h3>
-                    <p>$3,000</p>
-                    <button onclick="addToCart('JEM / PIA (Steve Vai Signature)', 3000)">Add to Cart</button>
-                </div>
-            </div>
-
-            <h2>Ibanez - Bass Guitars</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <a href="product-sr-gio.html">
-                        <img src="images/Ibanez SR Series Gio.webp" alt="SR Series Gio">
-                    </a>
-                    <h3>SR (Soundgear) Series (Gio/Standard)</h3>
-                    <p>$200</p>
-                    <button onclick="addToCart('SR (Soundgear) Series (Gio/Standard)', 200)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-sr-premium.html">
-                        <img src="images/Ibanez SR Series Premium.jpg" alt="SR Series Premium">
-                    </a>
-                    <h3>SR (Soundgear) Series (Premium/Prestige)</h3>
-                    <p>$1,000</p>
-                    <button onclick="addToCart('SR (Soundgear) Series (Premium/Prestige)', 1000)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-talman-bass.html">
-                        <img src="images/Ibanez Talman Bass.webp" alt="Talman Bass">
-                    </a>
-                    <h3>Talman Bass (TMB Series)</h3>
-                    <p>$250</p>
-                    <button onclick="addToCart('Talman Bass (TMB Series)', 250)">Add to Cart</button>
-                </div>
-                <div class="product-card">
-                    <a href="product-btb-series.html">
-                        <img src="images/Ibanez BTB Series Bass.jpg" alt="BTB Series">
-                    </a>
-                    <h3>BTB Series</h3>
-                    <p>$800</p>
-                    <button onclick="addToCart('BTB Series', 800)">Add to Cart</button>
-                </div>
-            </div>
-        </section>
-    </div>
-
-</main>
-
-<a href="index.html"><button>^</button></a>
-
-<footer>
-    <p>&copy; 2025 Guitar Shop. All rights reserved.</p>
-</footer>
-
-<script>
-     function showBrand(brand) {
-        document.querySelectorAll('.wrapper').forEach(wrapper => {
-            wrapper.classList.remove('active');
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
         });
-        const selected = document.getElementById(brand);
-        selected.classList.add('active');
-    }
-
-    function addToCart(productName, productPrice) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let productIndex = cart.findIndex(item => item.name === productName);
-
-        if (productIndex !== -1) {
-            alert('Item is already added to cart!');
-        } else {
-            cart.push({ name: productName, price: productPrice, quantity: 1, colors: [] });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert(productName + ' added to cart!');
-        }
-
-        updateCartCount();
-        updateFloatingCartCount();
-
-    }
-
-    function updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const count = cart.length;
-        const cartCountEl = document.getElementById('cart-count');
-        if (cartCountEl) {
-            cartCountEl.textContent = `(${count})`;
-        }
-    }
-
-    window.addEventListener('load', updateCartCount);
-
-
-    function toggleMenu() {
-    const navbar = document.getElementById('navbar');
-    navbar.classList.toggle('active');
-}
-function updateFloatingCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const count = cart.length;
-    const cartCountEl = document.getElementById('floating-cart-count');
-    if (cartCountEl) {
-        cartCountEl.textContent = count;
-    }
-}
-
-window.addEventListener('load', updateFloatingCartCount);
-
-   function setupBrandSearch(inputId, wrapperId, noResultsId) {
-    document.getElementById(inputId).addEventListener('input', function() {
-        const filter = this.value.toLowerCase();
-        const wrapper = document.getElementById(wrapperId);
-        const productCards = wrapper.querySelectorAll('.product-card');
-        const noResultsMessage = document.getElementById(noResultsId);
-
-        let visibleCount = 0;
-
-        productCards.forEach(card => {
-            const name = card.querySelector('h3').textContent.toLowerCase();
-            if (name.includes(filter)) {
-                card.style.display = '';
-                visibleCount++;
-            } else {
-                card.style.display = 'none';
-            }
-        });
-
-        if (visibleCount === 0) {
-            noResultsMessage.style.display = 'block';
-        } else {
-            noResultsMessage.style.display = 'none';
-        }
-    });
-}
-
-    // Initialize all brand search bars
- setupBrandSearch('searchFender', 'fender', 'noResultsFender');
-setupBrandSearch('searchGibson', 'gibson', 'noResultsGibson');
-setupBrandSearch('searchIbanez', 'ibanez', 'noResultsIbanez');
-
-</script>
-
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    </script>
 
 </body>
+
 </html>

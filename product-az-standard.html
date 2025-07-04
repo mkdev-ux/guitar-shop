@@ -6,27 +6,27 @@
     <title>AZ Series (AZES/Standard) - Details</title>
     <link rel="stylesheet" href="productdetail.css" />
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather&display=swap" rel="stylesheet">
-
 </head>
 <body>
     <header>
-    <div class="logo">Guitar Shop</div>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <nav id="navbar">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
-            <li><a href="checkout.html">Checkout</a></li>
-        </ul>
-    </nav>
-</header>
+        <div class="logo">Rudy's music</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <nav id="navbar">
+            <ul>
+                <li><a href="products.html">Home</a></li>
+                <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <main>
         <div class="product-detail">
             <h1>AZ Series (AZES/Standard)</h1>
             <p class="product-description">
-    The AZ Series AZES/Standard is beginner-friendly, with comfortable neck profiles and versatile sound, suitable for players exploring different styles.
-</p>
+                The AZ Series AZES/Standard is beginner-friendly, with comfortable neck profiles and versatile sound, suitable for players exploring different styles.
+            </p>
             <div class="product-images">
                 <img src="images/Ibanez AZ Series Standard.png" alt="AZ Series AZES Standard" />
                 <img src="ibanezdetails/AZ Series (AZES-Standard)-1.webp" alt="AZES Standard Detail 1" />
@@ -35,15 +35,84 @@
             </div>
             <p class="price">Price: $400</p>
             <button class="add-to-cart" onclick="addToCart('AZ Series (AZES/Standard)', 400)">Add to Cart</button>
+
+            <!-- Features Section -->
+            <section>
+                <h2>Key Features</h2>
+                <ul class="features-list">
+                    <li>Comfortable neck profile ideal for beginners</li>
+                    <li>Versatile pickups for a wide range of tones</li>
+                    <li>Durable body construction for lasting playability</li>
+                    <li>Modern 22-fret rosewood fingerboard</li>
+                    <li>Classic styling with a modern twist</li>
+                </ul>
+            </section>
+
+            <!-- Specifications Table -->
+            <section>
+                <h2>Specifications</h2>
+                <table class="specs-table">
+                    <tr>
+                        <th>Body</th>
+                        <td>Alder</td>
+                    </tr>
+                    <tr>
+                        <th>Neck</th>
+                        <td>Maple</td>
+                    </tr>
+                    <tr>
+                        <th>Fingerboard</th>
+                        <td>Rosewood, 22 Medium Frets</td>
+                    </tr>
+                    <tr>
+                        <th>Pickups</th>
+                        <td>Infinity R Humbuckers (Neck & Bridge)</td>
+                    </tr>
+                    <tr>
+                        <th>Controls</th>
+                        <td>1 Volume, 1 Tone, 5-Way Pickup Selector</td>
+                    </tr>
+                    <tr>
+                        <th>Bridge</th>
+                        <td>Fixed Bridge</td>
+                    </tr>
+                    <tr>
+                        <th>Finish</th>
+                        <td>Gloss Transparent</td>
+                    </tr>
+                    <tr>
+                        <th>Weight</th>
+                        <td>Approx. 7.5 lbs</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- Shipping & Returns -->
+            <section>
+                <h2>Shipping & Returns</h2>
+                <p>
+                    Free standard shipping within the USA. Expedited shipping options available at checkout.
+                    Returns accepted within 30 days of delivery. Item must be in original condition and packaging.
+                </p>
+            </section>
+
+            <!-- Customer Reviews -->
+            <section>
+                <h2>Customer Reviews</h2>
+                <p><strong>★★★★☆</strong> "Great starter guitar with solid tone and feel." - Alex P.</p>
+                <p><strong>★★★★☆</strong> "Perfect for trying out different styles with ease." - Nina K.</p>
+            </section>
         </div>
     </main>
 
+    <a href="cart.html" class="floating-cart">
+        🛒 <span id="floating-cart-count">0</span>
+    </a>
+
     <footer>
-        <p>&copy; 2025 Guitar Shop. All rights reserved.</p>
+        <p>&copy; 2025 Rudy's music. All rights reserved.</p>
     </footer>
-<a href="cart.html" class="floating-cart">
-    🛒 <span id="floating-cart-count">0</span>
-</a>
+
     <script>
        function addToCart(productName, productPrice) {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -71,39 +140,38 @@
         }
     }
 
-    window.addEventListener('load', updateCartCount);
+    function updateFloatingCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const count = cart.length;
+        const cartCountEl = document.getElementById('floating-cart-count');
+        if (cartCountEl) {
+            cartCountEl.textContent = count;
+        }
+    }
 
+    window.addEventListener('load', () => {
+        updateCartCount();
+        updateFloatingCartCount();
+    });
 
     function toggleMenu() {
-    const navbar = document.getElementById('navbar');
-    navbar.classList.toggle('active');
-}
-function updateFloatingCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const count = cart.length;
-    const cartCountEl = document.getElementById('floating-cart-count');
-    if (cartCountEl) {
-        cartCountEl.textContent = count;
+        const navbar = document.getElementById('navbar');
+        navbar.classList.toggle('active');
     }
-}
-
-window.addEventListener('load', updateFloatingCartCount);
-
-
     </script>
 
- <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
 </body>
 </html>

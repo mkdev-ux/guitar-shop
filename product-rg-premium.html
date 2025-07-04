@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>RG Series (Premium/Prestige) - Details</title>
-    <link rel="stylesheet" href="productdetail.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="productdetail.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Merriweather&display=swap" rel="stylesheet" />
 </head>
 <body>
    <header>
-    <div class="logo">Guitar Shop</div>
+    <div class="logo">Rudy's music</div>
     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     <nav id="navbar">
         <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Home</a></li>
             <li><a href="cart.html">Cart <span id="cart-count">(0)</span></a></li>
+            <li><a href="reviews.html">Reviews</a></li>
             <li><a href="checkout.html">Checkout</a></li>
         </ul>
     </nav>
@@ -24,23 +24,53 @@
         <div class="product-detail">
             <h1>RG Series (Premium/Prestige)</h1>
             <p class="product-description">
-    Designed for speed and precision, the Premium/Prestige models deliver high-performance features and pro-level playability for shredders and metal players.
-</p>
+                Designed for speed and precision, the Premium/Prestige models deliver high-performance features and pro-level playability for shredders and metal players.
+            </p>
             <div class="product-images">
-                <img src="images/Ibanez RG Series Premium.jpeg" alt="RG Series Premium">
-                <img src="ibanezdetails/RG Series (Premium-Prestige)-1.jpg" alt="RG Premium Detail 1">
-                <img src="ibanezdetails/RG Series (Premium-Prestige)-2.jpg" alt="RG Premium Detail 2">
-                <img src="ibanezdetails/RG Series (Premium-Prestige)-3.jpg" alt="RG Premium Detail 3">
+                <img src="images/Ibanez RG Series Premium.jpeg" alt="RG Series Premium" />
+                <img src="ibanezdetails/RG Series (Premium-Prestige)-1.jpg" alt="RG Premium Detail 1" />
+                <img src="ibanezdetails/RG Series (Premium-Prestige)-2.jpg" alt="RG Premium Detail 2" />
+                <img src="ibanezdetails/RG Series (Premium-Prestige)-3.jpg" alt="RG Premium Detail 3" />
             </div>
             <p class="price">Price: $1,000</p>
             <button class="add-to-cart" onclick="addToCart('RG Series (Premium/Prestige)', 1000)">Add to Cart</button>
+
+            <!-- Features Section -->
+            <section>
+                <h2>Key Features</h2>
+                <ul class="features-list">
+                    <li>Mahogany body with carved maple top for rich resonance</li>
+                    <li>Maple neck with ultra-fast Wizard neck profile</li>
+                    <li>Rosewood or maple fingerboard options with 24 jumbo frets</li>
+                    <li>Quantum or DiMarzio pickups for aggressive tone and clarity</li>
+                    <li>Edge-Zero II tremolo bridge for tuning stability and smooth dive bombs</li>
+                    <li>Locking tuners for fast string changes and stability</li>
+                    <li>Premium finishes with elegant binding and inlays</li>
+                </ul>
+            </section>
+
+            <!-- Specifications Table -->
+            <section>
+                <h2>Specifications</h2>
+                <table class="specs-table">
+                    <tr><th>Body</th><td>Mahogany with Maple Top</td></tr>
+                    <tr><th>Neck</th><td>Maple, Wizard Profile</td></tr>
+                    <tr><th>Fingerboard</th><td>Rosewood or Maple, 24 Jumbo Frets</td></tr>
+                    <tr><th>Pickups</th><td>Quantum or DiMarzio (Bridge & Neck)</td></tr>
+                    <tr><th>Bridge</th><td>Edge-Zero II Tremolo</td></tr>
+                    <tr><th>Tuning Machines</th><td>Locking Tuners</td></tr>
+                    <tr><th>Controls</th><td>Volume, Tone, 5-Way Switch</td></tr>
+                    <tr><th>Finish</th><td>Gloss or Satin Premium</td></tr>
+                    <tr><th>Weight</th><td>Approx. 7 lbs</td></tr>
+                </table>
+            </section>
         </div>
     </main>
 <a href="cart.html" class="floating-cart">
     🛒 <span id="floating-cart-count">0</span>
 </a>
     <footer>
-        <p>&copy; 2025 Guitar Shop. All rights reserved.</p>
+        <p>&copy; 2025 Rudy's music. All rights reserved.</p>
     </footer>
 
     <script>
@@ -70,25 +100,24 @@
         }
     }
 
-    window.addEventListener('load', updateCartCount);
-
-
     function toggleMenu() {
-    const navbar = document.getElementById('navbar');
-    navbar.classList.toggle('active');
-}
-function updateFloatingCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const count = cart.length;
-    const cartCountEl = document.getElementById('floating-cart-count');
-    if (cartCountEl) {
-        cartCountEl.textContent = count;
+        const navbar = document.getElementById('navbar');
+        navbar.classList.toggle('active');
     }
-}
 
-window.addEventListener('load', updateFloatingCartCount);
+    function updateFloatingCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const count = cart.length;
+        const cartCountEl = document.getElementById('floating-cart-count');
+        if (cartCountEl) {
+            cartCountEl.textContent = count;
+        }
+    }
 
-
+    window.addEventListener('load', () => {
+        updateCartCount();
+        updateFloatingCartCount();
+    });
     </script>
 
  <!--Start of Tawk.to Script-->
