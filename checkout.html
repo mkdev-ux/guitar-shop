@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Checkout - Rudy's music</title>
   <link rel="stylesheet" href="checkout.css" />
   <style>
-    /* Quick styles for the success message */
     #success-message {
       display: none;
       margin-top: 20px;
@@ -19,172 +19,234 @@
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <div class="logo">Checkout</div>
-  <nav id="navbar">
-    <ul>
-      <li><a href="products.html">Home</a></li>
-      <li><a href="cart.html">Cart</a></li>
-      <li><a href="reviews.html">Reviews</a></li>
-    </ul>
-  </nav>
-</header>
+  <header>
+    <div class="logo">Checkout</div>
+    <nav id="navbar">
+      <ul>
+        <li><a href="products.html">Home</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<main class="checkout-container">
-  <form id="checkout-form" action="https://formsubmit.co/ajax/guitarestore@outlook.com" method="POST">
-    <table id="checkout-table">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Quantity</th>
-          <th>Colors(s)</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody id="checkout-items">
-        <!-- Cart items will be loaded here -->
-      </tbody>
-    </table>
+  <main class="checkout-container">
+    <form id="checkout-form" action="https://formsubmit.co/ajax/guitarestore@outlook.com" method="POST">
+      <table id="checkout-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Colors(s)</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody id="checkout-items">
+          <!-- Cart items will be loaded here -->
+        </tbody>
+      </table>
 
-    <div class="total" id="total-price">Total: $0.00</div>
+      <div class="total" id="total-price">Total: $0.00</div>
+      <div class="total" id="shipping-cost">Shipping: $0.00</div>
+      <div class="total" id="final-total">Final Total: $0.00</div>
 
-    <h3>Customer Information</h3>
-    <input type="text" name="Name" placeholder="Full Name" required />
-    <input type="email" name="Email" placeholder="Email Address" required />
-    <input type="tel" name="Phone" placeholder="Phone Number" required />
-    <textarea name="Shipping Address" placeholder="Shipping Address" required></textarea>
+      <h3>Customer Information</h3>
+      <input type="text" name="Name" placeholder="Full Name" required />
+      <input type="email" name="Email" placeholder="Email Address" required />
+      <input type="tel" name="Phone" placeholder="Phone Number" required />
+      <textarea name="Shipping Address" placeholder="Shipping Address" required></textarea>
 
-    <h3>Select Payment Method</h3>
-    <select name="Payment Method" required>
-      <option value="Apple Pay">Apple Pay</option>
-      <option value="Bitcoin">Bitcoin</option>
-      <option value="Gift Card">Gift Card</option>
-      <option value="PayPal">PayPal</option>
-      <option value="Venmo">Venmo</option>
-      <option value="Zelle">Zelle</option>
-    </select>
+      <h3>Country</h3>
+      <select name="Country" id="country" required onchange="calculateShipping()">
+        <option value="">Select Country</option>
+        <option value="USA">USA</option>
+        <option value="Canada">Canada</option>
+        <option value="United Kingdom">United Kingdom</option>
+        <option value="Australia">Australia</option>
+        <option value="Germany">Germany</option>
+        <option value="France">France</option>
+        <option value="Cameroon">Cameroon</option>
+        <option value="Other">Other</option>
+      </select>
 
-    <!-- Hidden field to send cart details -->
-    <textarea name="Order Details" id="order-details" style="display:none;"></textarea>
+      <h3>Shipping Options</h3>
+      <select name="Shipping Option" id="shipping-option" required onchange="calculateShipping()">
+        <option value="">Select Shipping</option>
+        <option value="Standard Shipping">Standard Shipping</option>
+        <option value="Express Shipping">Express Shipping</option>
+      </select>
 
-    <button type="submit" class="place-order-btn">Place Order</button>
-  </form>
+      <h3>Select Payment Method</h3>
+      <select name="Payment Method" required>
+        <option value="Apple Pay">Apple Pay</option>
+        <option value="Bitcoin">Bitcoin</option>
+        <option value="Gift Card">Gift Card</option>
+        <option value="PayPal">PayPal</option>
+        <option value="Venmo">Venmo</option>
+        <option value="Zelle">Zelle</option>
+      </select>
 
-  <div id="success-message"></div>
-</main>
+      <textarea name="Order Details" id="order-details" style="display:none;"></textarea>
 
-<footer>
-  <p>&copy; 2025 Rudy's music. All rights reserved.</p>
-</footer>
+      <button type="submit" class="place-order-btn">Place Order</button>
+    </form>
 
-<script>
-  function loadCheckout() {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const checkoutTable = document.getElementById('checkout-items');
-    const totalPriceEl = document.getElementById('total-price');
-    const orderDetailsEl = document.getElementById('order-details');
-    let total = 0;
-    let orderSummary = '';
+    <div id="success-message"></div>
+  </main>
 
-    checkoutTable.innerHTML = '';
+  <footer>
+    <p>&copy; 2025 Rudy's music. All rights reserved.</p>
+  </footer>
 
-    cart.forEach(item => {
-      let itemTotal = item.price * item.quantity;
-      total += itemTotal;
+  <script>
+    let cartTotal = 0;
 
-      const colorsText = item.colors && item.colors.length > 0 ? item.colors.join(', ') : 'No color selected';
+    function loadCheckout() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const checkoutTable = document.getElementById('checkout-items');
+      const totalPriceEl = document.getElementById('total-price');
+      const orderDetailsEl = document.getElementById('order-details');
+      let total = 0;
+      let orderSummary = '';
 
-      const row = `
-        <tr>
-          <td>${item.name}</td>
-          <td>${item.quantity}</td>
-          <td>${colorsText}</td>
-          <td>$${itemTotal.toFixed(2)}</td>
-        </tr>
-      `;
-      checkoutTable.insertAdjacentHTML('beforeend', row);
+      checkoutTable.innerHTML = '';
 
-      orderSummary += `Product: ${item.name}, Quantity: ${item.quantity}, Colors: ${colorsText}, Price: $${itemTotal.toFixed(2)}\n`;
-    });
+      cart.forEach(item => {
+        let itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        cartTotal = total;
 
-    totalPriceEl.textContent = 'Total: $' + total.toFixed(2);
-    orderSummary += `Total: $${total.toFixed(2)}`;
-    orderDetailsEl.value = orderSummary;
-  }
+        const colorsText = item.colors && item.colors.length > 0 ? item.colors.join(', ') : 'No color selected';
 
-  window.onload = loadCheckout;
+        const row = `
+          <tr>
+            <td>${item.name}</td>
+            <td>${item.quantity}</td>
+            <td>${colorsText}</td>
+            <td>$${itemTotal.toFixed(2)}</td>
+          </tr>
+        `;
+        checkoutTable.insertAdjacentHTML('beforeend', row);
 
-  document.getElementById('checkout-form').addEventListener('submit', function (e) {
-    e.preventDefault();
+        orderSummary += `Product: ${item.name}, Quantity: ${item.quantity}, Colors: ${colorsText}, Price: $${itemTotal.toFixed(2)}\n`;
+      });
 
-    const form = e.target;
-    const successMsg = document.getElementById('success-message');
-    const formData = new FormData(form);
+      totalPriceEl.textContent = 'Total: $' + total.toFixed(2);
+      orderSummary += `Total: $${total.toFixed(2)}`;
+      orderDetailsEl.value = orderSummary;
 
-    fetch(form.action, {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'Accept': 'application/json'
+      calculateShipping();
+    }
+
+    function calculateShipping() {
+      const country = document.getElementById('country').value;
+      const shippingOption = document.getElementById('shipping-option').value;
+
+      let shippingCost = 0;
+
+      if (country === 'USA') {
+        if (shippingOption === 'Standard Shipping') {
+          shippingCost = 0; // Free shipping in USA
+        } else if (shippingOption === 'Express Shipping') {
+          shippingCost = 15;
+        }
+      } else if (country === 'Canada') {
+        if (shippingOption === 'Standard Shipping') {
+          shippingCost = 10;
+        } else if (shippingOption === 'Express Shipping') {
+          shippingCost = 20;
+        }
+      } else if (country !== '') { // Other countries
+        if (shippingOption === 'Standard Shipping') {
+          shippingCost = 20;
+        } else if (shippingOption === 'Express Shipping') {
+          shippingCost = 40;
+        }
       }
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success === "true" || data.message === "Thanks for your submission!") {
-          const orderDetails = formData.get('Order Details').replace(/\n/g, '<br>');
-          const name = formData.get('Name');
-          const email = formData.get('Email');
-          const phone = formData.get('Phone');
-          const shipping = formData.get('Shipping Address');
-          const payment = formData.get('Payment Method');
 
-          successMsg.style.display = 'block';
-          successMsg.style.color = '#155724';
-          successMsg.innerHTML = `
-            <p>Message sent! We will get back to you soon.</p>
-            <h4>Order Summary:</h4>
-            <p>${orderDetails}</p>
-            <h4>Customer Info:</h4>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Phone:</strong> ${phone}</p>
-            <p><strong>Shipping Address:</strong> ${shipping}</p>
-            <p><strong>Payment Method:</strong> ${payment}</p>
-          `;
+      document.getElementById('shipping-cost').textContent = 'Shipping: $' + shippingCost.toFixed(2);
+      document.getElementById('final-total').textContent = 'Final Total: $' + (cartTotal + shippingCost).toFixed(2);
+    }
 
-          form.reset();
-          localStorage.removeItem('cart');
-          loadCheckout();
-        } else {
+    window.onload = loadCheckout;
+
+    document.getElementById('checkout-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const successMsg = document.getElementById('success-message');
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success === "true" || data.message === "Thanks for your submission!") {
+            const orderDetails = formData.get('Order Details').replace(/\n/g, '<br>');
+            const name = formData.get('Name');
+            const email = formData.get('Email');
+            const phone = formData.get('Phone');
+            const shipping = formData.get('Shipping Address');
+            const payment = formData.get('Payment Method');
+            const country = formData.get('Country');
+            const shippingOption = formData.get('Shipping Option');
+
+            successMsg.style.display = 'block';
+            successMsg.style.color = '#155724';
+            successMsg.innerHTML = `
+              <p>Message sent! We will get back to you soon.</p>
+              <h4>Order Summary:</h4>
+              <p>${orderDetails}</p>
+              <h4>Customer Info:</h4>
+              <p><strong>Name:</strong> ${name}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Phone:</strong> ${phone}</p>
+              <p><strong>Shipping Address:</strong> ${shipping}</p>
+              <p><strong>Country:</strong> ${country}</p>
+              <p><strong>Shipping Option:</strong> ${shippingOption}</p>
+              <p><strong>Payment Method:</strong> ${payment}</p>
+            `;
+
+            form.reset();
+            localStorage.removeItem('cart');
+            loadCheckout();
+          } else {
+            successMsg.style.display = 'block';
+            successMsg.style.color = 'red';
+            successMsg.textContent = 'Oops! There was a problem sending your message.';
+          }
+        })
+        .catch(() => {
           successMsg.style.display = 'block';
           successMsg.style.color = 'red';
           successMsg.textContent = 'Oops! There was a problem sending your message.';
-        }
-      })
-      .catch(() => {
-        successMsg.style.display = 'block';
-        successMsg.style.color = 'red';
-        successMsg.textContent = 'Oops! There was a problem sending your message.';
-      });
-  });
-</script>
+        });
+    });
+  </script>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-  var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-  (function () {
-    var s1 = document.createElement("script"),
-      s0 = document.getElementsByTagName("script")[0];
-    s1.async = true;
-    s1.src = 'https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
-    s1.charset = 'UTF-8';
-    s1.setAttribute('crossorigin', '*');
-    s0.parentNode.insertBefore(s1, s0);
-  })();
-</script>
-<!--End of Tawk.to Script-->
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"),
+        s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/6863a0382988aa1919e03776/1iv2ijo1r';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
 
 </body>
+
 </html>
